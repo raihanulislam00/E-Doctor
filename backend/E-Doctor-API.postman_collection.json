@@ -1,0 +1,193 @@
+{
+  "info": {
+    "_postman_id": "doctor-registration-api",
+    "name": "E-Doctor - Doctor Registration & Login API",
+    "description": "Complete API collection for Doctor Registration with Admin Verification and JWT Authentication",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Doctor Registration",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "Dr. John Doe",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "+8801712345678",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "doctor@example.com",
+              "type": "text"
+            },
+            {
+              "key": "specialization",
+              "value": "Cardiology",
+              "type": "text"
+            },
+            {
+              "key": "qualification",
+              "value": "MBBS, MD",
+              "type": "text"
+            },
+            {
+              "key": "experienceYear",
+              "value": "5",
+              "type": "text"
+            },
+            {
+              "key": "hospitalName",
+              "value": "City Hospital",
+              "type": "text"
+            },
+            {
+              "key": "medicalLicenseNumber",
+              "value": "ML12345",
+              "type": "text"
+            },
+            {
+              "key": "licenseNumber",
+              "value": "LN12345",
+              "type": "text"
+            },
+            {
+              "key": "nidNumber",
+              "value": "1234567890123",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "SecurePass@123",
+              "type": "text"
+            },
+            {
+              "key": "licenseImage",
+              "value": null,
+              "type": "file",
+              "disabled": false
+            },
+            {
+              "key": "doctorImage",
+              "value": null,
+              "type": "file",
+              "disabled": false
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/doctor/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["doctor", "register"]
+        },
+        "description": "Register a new doctor (Doctor provides all required information and uploads medical documents)"
+      },
+      "response": []
+    },
+    {
+      "name": "Doctor Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"doctor@example.com\",\n  \"password\": \"SecurePass@123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/doctor/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["doctor", "login"]
+        },
+        "description": "Login doctor with verified account (Only works after admin approves registration)"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Doctor Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/doctor/profile",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["doctor", "profile"]
+        },
+        "description": "Get logged-in doctor's profile information (Requires JWT token)"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Pending Registrations (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/doctor/pending-registrations",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["doctor", "pending-registrations"]
+        },
+        "description": "Get all doctors with pending registration (Admin endpoint to review registrations)"
+      },
+      "response": []
+    },
+    {
+      "name": "Verify Doctor Registration (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"doctorId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"action\": \"approve\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/doctor/verify-registration",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["doctor", "verify-registration"]
+        },
+        "description": "Approve or reject doctor registration (Admin action: approve or reject)"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
